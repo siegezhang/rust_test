@@ -66,7 +66,6 @@ macro_rules! map {
 
 
 
-
 fn main() {
     foo();
     bar();
@@ -86,7 +85,6 @@ fn main() {
     // Recall that blocks are expressions too!
     print_result!({
         let x = 1u32;
-
         x * x + 2 * x - 1
     });
 }
