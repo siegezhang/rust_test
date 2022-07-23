@@ -1,11 +1,13 @@
 [package]
-name = "rust_test"
+name = "proc_macro_define_crate"
 version = "0.1.0"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-proc_macro_define_crate = {path="./proc_macro_define_crate"}
+quote = "1"
+syn = {features=["full","extra-traits"]}
 
-
+[lib]
+proc-macro = true
