@@ -3,6 +3,10 @@
 version = 3
 
 [[package]]
+name = "learning"
+version = "0.1.0"
+
+[[package]]
 name = "proc-macro2"
 version = "1.0.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -32,6 +36,7 @@ dependencies = [
 name = "rust_test"
 version = "0.1.0"
 dependencies = [
+ "learning",
  "proc_macro_define_crate",
 ]
 

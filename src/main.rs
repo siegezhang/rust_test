@@ -94,4 +94,11 @@ fn main() {
         let x = 1u32;
         x * x + 2 * x - 1
     });
+
+    let name="Pascal";
+    greet(name);
+}
+
+fn greet(name: &str) {
+    println!("Hello, {}!", name);
 }
