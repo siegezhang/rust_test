@@ -1,57 +1,33 @@
-pub trait Summary {
-    fn summarize_author(&self) -> String;
-
-    fn summarize(&self) -> String {
-        format!("(Read more from {}...)", self.summarize_author())
-    }
-}
-
-pub struct Tweet {
-    pub username: String,
-    pub content: String,
-    pub reply: bool,
-    pub retweet: bool,
-}
-impl Summary for Tweet {
-    fn summarize_author(&self) -> String {
-        format!("@{}", self.username)
-    }
-}
-
-pub fn notify(item: &impl Summary) {
-    println!("Breaking news! {}", item.summarize());
-}
-pub fn notify1<T: Summary>(item: &T) {
-    println!("Breaking news! {}", item.summarize());
-}
 #[cfg(test)]
-mod test3 {
-    use crate::test1::Summary;
-    use crate::test1::Tweet;
-
-    use super::notify;
-    use super::notify1;
+mod test1 {
+    use chrono::prelude::*;
+    use mysql::prelude::*;
+    use mysql::*; // 用来处理日期
     #[test]
-    fn test_trait() {
-        let tweet = Tweet {
-            username: String::from("horse_ebooks"),
-            content: String::from("of course, as you probably already know, people"),
-            reply: false,
-            retweet: false,
-        };
-
-        println!("1 new tweet: {}", tweet.summarize());
-    }
-
-    #[test]
-    fn test_trait2() {
-        let tweet = Tweet {
-            username: String::from("horse_ebooks"),
-            content: String::from("of course, as you probably already know, people"),
-            reply: false,
-            retweet: false,
-        };
-        notify(&tweet);
-        notify1(&tweet);
+    fn mysql_conn() {
+        // println!("Hello, world!");
+        let url = "mysql://root:123456@localhost:3306/rust_demo";
+        let pool = Pool::new(url).unwrap(); // 获取连接池
+        let mut conn = pool.get_conn().unwrap(); // 获取链接
+        conn.query_iter("select * from tm_user")
+            .unwrap()
+            .for_each(|row| {
+                let r: (
+                    String,
+                    NaiveDateTime,
+                    NaiveDateTime,
+                    String,
+                    String,
+                    String,
+                    String,
+                    String,
+                    String,
+                    i32,
+                ) = from_row(row.unwrap());
+                println!(
+                    "{}, {:?},{:?},{}, {},{}, {},{},{:?},{}",
+                    r.0, r.1, r.2, r.3, r.4, r.5, r.6, r.7, r.8, r.9
+                );
+            });
     }
 }
