@@ -13,5 +13,7 @@ macro_rules! create_impl {
 
 #[test]
 fn test4() {
-    create_impl!(StructName, { fn foo() -> u32 { return 432 } }, { fn bar() -> u32 { return 765 } });
+    create_impl!(StructName, { fn foo(&self) -> u32 { return 432 } }, { fn bar(&self) -> u32 { return 765 } });
+    let s=StructName{};
+    s.foo();
 }

@@ -1,7 +1,7 @@
 use proc_macro_define_crate::mytest_proc_macro;
 
 #[mytest_proc_macro(blog(::ideawand::com))]
-fn pro_foo(a:i32){
+fn pro_foo(){
     println!("hello, blog.ideawand.com, hello, 极客幼稚园");
 }
 
