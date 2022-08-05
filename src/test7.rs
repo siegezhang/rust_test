@@ -10,4 +10,5 @@ fn pro_foo(){
 #[test]
 fn test7() {
     //过程宏的处理
+    pro_foo();
 }
